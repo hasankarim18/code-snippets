@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+  </head>
+  <body>
+    <div class="wrapper">
+      <div
+        data-rotate-wrapper
+        class="p-10 bg-gray-200 hover:bg-gray-400 cursor-pointer"
+      >
+        <button>
+          <svg
+            data-rotate-180
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke-width="1.5"
+            stroke="currentColor"
+            class="size-6"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              d="M12 4.5v15m7.5-7.5h-15"
+            />
+          </svg>
+        </button>
+      </div>
+    </div>
+  </body>
+</html>
+
+<script>
+  const initializeRotateOnHover = () => {
+    // Select all parent elements with the data-rotate-wrapper attribute
+    const wrappers = document.querySelectorAll("[data-rotate-wrapper]");
+
+    // Loop through each parent element
+    wrappers.forEach((wrapper) => {
+      // Find the child element with the data-rotate-180 attribute
+      const child = wrapper.querySelector("[data-rotate-180]");
+
+      // If the child exists, add event listeners to the parent
+      if (child) {
+        // Add event listener for mouseenter (hover on parent)
+        wrapper.addEventListener("mouseenter", () => {
+          console.log("mouse enter");
+
+          child.style.transition = "transform 500ms ease";
+          child.style.transform = "rotate(180deg)";
+        });
+
+        // Add event listener for mouseleave (hover off parent)
+        wrapper.addEventListener("mouseleave", () => {
+          child.style.transition = "transform 500ms ease";
+          child.style.transform = "rotate(0deg)";
+        });
+      }
+    });
+  };
+
+  // Execute the function as soon as the page is loaded
+  window.addEventListener("DOMContentLoaded", initializeRotateOnHover);
+</script>
+
+<style>
+  .wrapper {
+    width: 100%;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+</style>
